@@ -20,19 +20,7 @@ exports.createSubSection = async(req, res) => {
         //update video to cloudinary
         const uploadDetails = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
         //create a sub-section
-        // const SubSectionDetails = await SubSection.create({
-        //     title:title,
-        //     timeDuration:timeDuration,
-        //     description:description,
-        //     videoUrl:uploadDetails.secure_url,
-        // })
-        // //update section with this sub section ObjectId
-        // const updatedSection = await Section.findByIdAndUpdate({_id:sectionId}),
-        //                                             {$push:{
-        //                                                 subSection:SubSectionDetails._id,
-        //                                             }},
-        //                                             {new:true});
-        const SubSectionDetails = await SubSection.create({
+        const subSectionDetails = await SubSection.create({
             title: title,
             timeDuration: timeDuration,
             description: description,
@@ -40,11 +28,12 @@ exports.createSubSection = async(req, res) => {
         });
         
         // Update section with this sub section ObjectId
-        const updatedSection = await Section.findByIdAndUpdate(
-            sectionId, // Correctly pass the sectionId as the first parameter
-            { $push: { subSection: SubSectionDetails._id } }, // Update object as the second parameter
-            { new: true } // Options as the third parameter
-        );
+        const updatedSection = await Section.findByIdAndUpdate({_id:sectionId}, // Correctly pass the sectionId as the first parameter
+                                                     { $push: { 
+                                                        subSection: subSectionDetails._id
+                                                     }}, // Update object as the second parameter
+                                                     { new:true}); // Options as the third parameter
+        
         //return response
         return res.status(200).json({
             success:true,
