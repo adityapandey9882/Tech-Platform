@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Define the Courses schema
 const courseSchema = new mongoose.Schema({
     courseName: {
         type:String,
@@ -9,7 +10,7 @@ const courseSchema = new mongoose.Schema({
     },
     instructor: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
+        ref:"user",
         required:true,
     },
     whatYouWillLearn: {
@@ -34,14 +35,27 @@ const courseSchema = new mongoose.Schema({
         type:String,
     },
     tag: {
+        type: [String],
+        required: true,
+    },
+    category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"Tag",
+        // required: true,
+        ref: "Category"
     },
     studentsErolled: [{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:"User",
-    }]
-})
+        ref:"user",
+    }],
+    instructions: {
+        type: [String],
+    },
+    status: {
+        type: String,
+        enum: ["Draft", "Published"],
+    },
+});
 
+// Export the Courses model
 module.exports = mongoose.model("Course", courseSchema)
