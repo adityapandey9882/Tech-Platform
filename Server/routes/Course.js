@@ -45,35 +45,35 @@ const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth"
 //                                                course routes
 
 // Courses can only be Created by Instructor
-router.post("/createCourse", auth, isInstructor, creteCourse)
+router.post("/createCourse", function (req,res){auth, isInstructor, creteCourse})
 // Add  a Section to a Course
-router.post("/addSection", auth, isInstructor, createSection)
+router.post("/addSection", function (req,res){auth, isInstructor, createSection})
 // Update a Section 
- router.post("/updateSection", auth, isInstructor, updateSection)
+ router.post("/updateSection", function (req,res){auth, isInstructor, updateSection})
  // Delete a Section
- router.post("/deleteSection", auth, isInstructor, deleteSection)
+ router.post("/deleteSection", function (req,res){auth, isInstructor, deleteSection})
  // Edit Sub Section
- router.post("updateSubSection", auth, isInstructor, updateSubSection)
+ router.post("updateSubSection", function (req,res){auth, isInstructor, updateSubSection})
  // Delete Sub Section
- router.post("/deleteSubSection", isInstructor, deleteSubSection)
+ router.post("/deleteSubSection", function (req,res){isInstructor, deleteSubSection})
  // Add a Sub Section to a Section
- router.post("/addSubSection", isInstructor, createSubSection)
+ router.post("/addSubSection", function (req,res){isInstructor, createSubSection})
  // Get all Registered Courses
- router.get("/getAllCourses", getAllCourses)
+ router.get("/getAllCourses", function (req,res){getAllCourses})
  // Get Details for a Specific Courses
- router.post("/getCourseDetails", getCourseDetails)
+ router.post("/getCourseDetails", function (req,res){getCourseDetails})
 
 //************************************************************************************************************************************** */
 //                                               
 //************************************************************************************************************************************** */
-router.get("/showAllCotegories", showAllCategories)
-router.post("/getCategoryPageDetails", categoryPageDetails)
+router.get("/showAllCotegories", function (req,res){showAllCategories})
+router.post("/getCategoryPageDetails", function (req,res){categoryPageDetails})
 
 //**********************************************************************************************************************
 //                                                   Rating and Review
 //**********************************************************************************************************************/
-router.post("/createRating", auth, isStudent, createRating)
-router.get("/getAverageRating", getAverageRating)
-router.get("/getReview", getAllRating)
+router.post("/createRating",function (req,res){ auth, isStudent, createRating})
+router.get("/getAverageRating", function (req,res){getAverageRating})
+router.get("/getReview", function (req,res){getAllRating})
 
 module.exports = router

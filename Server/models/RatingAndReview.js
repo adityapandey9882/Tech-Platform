@@ -1,10 +1,10 @@
 const { mongo } = require("mongoose");
 
-const mongoose = reqire("mongoose");
+const mongoose = require("mongoose");
 
 const ratingAndReviewSchema = new mongoose.Schema({
     user:{
-        type:mongoose.Schema.Type.objectId,
+        type:mongoose.Types.ObjectId,
         required:true,
         ref:"User",
     },

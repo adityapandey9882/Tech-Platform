@@ -4,7 +4,7 @@ const router = express.Router()
 
 const { capturePayment, verifySignature} = require("../controllers/Pyments")
 const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth")
-router.post("/capturePayment", auth, isStudent, capturePayment)
-router.post("/verifySignature", verifySignature)
+router.post("/capturePayment",function (req,res){ auth, isStudent, capturePayment})
+router.post("/verifySignature",function (req,res){ verifySignature})
 
 module.exports = router
